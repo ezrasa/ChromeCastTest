@@ -7,15 +7,48 @@
 //
 
 #import "AppDelegate.h"
+#import <GoogleCast/GoogleCast.h>
 
-@implementation AppDelegate
+@interface AppDelegate()<GCKLoggerDelegate, GCKDeviceScannerListener>
+
+@end
+@implementation AppDelegate{
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    return YES;
+	[GCKLogger sharedInstance].delegate = self;
+  return YES;
+  // Override point for customization after application launch.
 }
-							
+
+
+/**
+ * Called when a device has been discovered or has come online.
+ *
+ * @param device The device.
+ */
+static NSString *const kReceiverAppID = @"YOUR_APP_ID_HERE";  //Replace with your app id
+
+- (void)deviceDidComeOnline:(GCKDevice *)device{
+	NSLog(@"Device came online %@", device);
+
+}
+
+/**
+ * Called when a device has gone offline.
+ *
+ * @param device The device.
+ */
+- (void)deviceDidGoOffline:(GCKDevice *)device{
+  NSLog(@"Device went offline");
+}
+
+
+- (void)logFromFunction:(const char *)function message:(NSString *)message{
+  NSLog(@"%s %@", function, message);
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
   // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

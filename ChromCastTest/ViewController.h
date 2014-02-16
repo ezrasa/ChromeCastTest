@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "CCPlayerView.h"
 @interface ViewController : UIViewController
+
+@property (nonatomic, weak) IBOutlet CCPlayerView *playerView;
+@property (nonatomic, weak) IBOutlet UIButton *playButton;
+@property (nonatomic, weak) IBOutlet UISlider *scrubber;
+@property	(nonatomic, weak) IBOutlet UITableView *tableView;
 
 @end
